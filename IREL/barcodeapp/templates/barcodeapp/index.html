@@ -1,0 +1,12 @@
+
+{% extends 'base.html'%}
+{% block title %}<title>Welcome To IREL </title>{% endblock %}
+{%block body %}
+<div class="container" >
+    <h1>Welcome IREL(Indian Rare Earth Limited)</h1>
+    <h2><a href="{% url 'poststock'%}" >Stock</a></h2>
+    <h2><a href="{% url 'postproduct'%}" >Product</a></h2>
+    <h2><a href="{% url 'shelfsticker'%}" >Shelf Sticker</a></h2>
+    <h2><a href="{% url 'productsticker'%}">Product Sticker</a></h2>
+{%endblock%}
+</div>

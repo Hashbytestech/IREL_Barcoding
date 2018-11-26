@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Shelf Stickering Generator</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+<form method="post" action="">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input type="submit" value="Save" class="p-3 mb-2 bg-primary text-white">
+        <a href="{% url 'shelfbarcodecreate' %}" class="p-3 mb-2 bg-primary text-white">Create</a>
+</form>
+
+</div>
+{% endblock %}

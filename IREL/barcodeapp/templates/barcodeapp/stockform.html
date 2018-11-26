@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>StockEntry</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+<form method="post" action="">
+        {%csrf_token%}
+        {{form.as_p}}
+
+        <input type="submit" value="Save">
+</form>
+</div>
+{% endblock %}

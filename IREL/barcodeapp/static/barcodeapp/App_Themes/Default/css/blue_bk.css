@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+.left-menu{
+border:#1B6DFD solid 1px;
+background-color:#C9F1FD;
+}
+
+
+.news h1{
+color:#000000;
+background-color:#C1D3E1;
+border-top:#83C4E2 solid 1px;
+}
+
+
+
+
+
+
+
+.related-link a{
+text-decoration:none;
+color:#000000;
+}
+.related-link a:hover{
+text-decoration:underline;
+}
+
+.related-link h2.related{
+color:#000000;
+background-color:#C1D3E1;
+border-top:#83C4E2 solid 1px;
+}
+
+
+
+.related-link li{
+list-style:url(../images/orange-bullet.jpg);
+}
+
+.related-link h2{
+color:#008EA0;
+}
+
+.about h2.heading{
+background-color:#013B69;
+color:#FFFFFF;
+}
+
+.about h2{
+color:#000000;
+}
+
+.top1 a{
+color:#FFFFFF;
+}
+.top2{
+color:#FFFFFF;
+}
+
+
+.search input{
+border:#999999 solid 1px;
+}
+
+
+.container{
+/*background-image:url(../images/bg.jpg);
+background-repeat:repeat-y;*/
+}
+
+.dg-desk{
+border:#83C4E2 solid 1px;
+background-color:#F2F6F9;
+}
+.dg-desk h2.sub-heading{
+background-color:#C1D3E1;
+color:#000000;
+}
+.sub-heading{
+background-color:#C1D3E1;
+color:#000000;
+}
+
+.dg-desk p{
+color:#0D4F89;
+}
+
+.dg-desk p.content{
+color:#0D4F89;
+}
+.dg-desk a{
+text-decoration:none;
+color:#000000;
+}
+.dg-desk a:hover{
+text-decoration:underline;
+color:#0000FF;
+}
+
+.visitors-count{
+color:#fff;
+}
+.last-updated-on{
+color:#fff;
+}
+.footer{
+/*background-image:url(../images/footer-bg.jpg);
+background-repeat:repeat-x;*/
+background:#2197C9;
+padding:10px 0;
+}
+.footer ul li{
+color:#fff;
+list-style: outside none none;
+}
+.footer ul li a{
+color: #FFFFFF;
+font-size: 13px;
+padding: 5px 10px;
+text-decoration: none;
+}
+.footer ul li a:hover{
+text-decoration:underline;
+color:#ffffff;
+}
+.footer p{
+color:#fff;
+padding:8px 0;
+font-size:100%;
+}
+
+
+/*--------------inside page start---------------*/
+
+.left-links{
+/*border:#1A86B5 solid 1px;*/
+}
+
+
+.left-links li{
+/*list-style:url(../images/list-arrow.jpg);*/
+}
+.left-links a{
+/*color:#666666;*/
+}
+
+
+
+.bradcrum a{
+color:#000000;
+}
+.bradcrum a:hover{
+color:#000000;
+}
+
+.about-us h2{
+background-color:#1A86B5;
+color:#FFFFFF;
+}
+/*--------------inside page end---------------*/

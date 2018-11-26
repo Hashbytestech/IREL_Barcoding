@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Shelf Stickering Shower</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+    {% for i in barcode %}
+    <p>{{i}}</p>
+    {% endfor %}
+</div>
+{% endblock %}
