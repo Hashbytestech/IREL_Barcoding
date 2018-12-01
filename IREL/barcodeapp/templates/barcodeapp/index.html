@@ -2,11 +2,24 @@
 {% extends 'base.html'%}
 {% block title %}<title>Welcome To IREL </title>{% endblock %}
 {%block body %}
-<div class="container" >
-    <h1>Welcome IREL(Indian Rare Earth Limited)</h1>
+
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-7">
+            <div class="widget no-border m-0">
+                {% load static %}<img src="{% static 'barcodeapp/images/logo-wide.png' %}" >
+                <h2>Indian Rare Earths Limited</h2>
+                  <span style="line-height:18px; margin-left:51px;">(A Govt. of India Undertaking)</span><br>
+                  <span>(ISO 9001:2015, ISO 14001:2015, OHSAS 18001 : 2007 Company)</span>
+            </div>
+          </div>
+  </div>
     <h2><a href="{% url 'poststock'%}" >Stock</a></h2>
     <h2><a href="{% url 'postproduct'%}" >Product</a></h2>
     <h2><a href="{% url 'shelfsticker'%}" >Shelf Sticker</a></h2>
     <h2><a href="{% url 'productsticker'%}">Product Sticker</a></h2>
-{%endblock%}
+    <h2><a href="{% url 'inspection'%}">Inspection</a></h2>
+    <h2><a href="{% url 'exit'%}">Exit Details</a></h2>
+    <h2><a href="{% url 'export_users_csv' %}">Export all users</a></h2>
 </div>
+{% endblock %}

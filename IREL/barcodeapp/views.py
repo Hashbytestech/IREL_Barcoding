@@ -1,9 +1,12 @@
 from django.shortcuts import render,HttpResponse,redirect
-from.models import *
 from .forms import *
+from .models import *
 from .filters import ProductFilter
 import barcode
 from barcode.writer import ImageWriter
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -30,7 +33,6 @@ def poststock(request):
         form=StockForm()
         form1=ProductForm()
         return render(request,'barcodeapp/stockform.html',{'form':form,'form1':form1})
-
 
 def shelfstiker(request):
     if request.method=='POST':
@@ -84,3 +86,24 @@ def search(request):
     product_list = Product.objects.all()
     product_filter = ProductFilter(request.GET, queryset=product_list)
     return render(request, 'barcodeapp/productdetails.html', {'filter': product_filter})
+
+def exit(request):
+    exit=Exit.objects.all()
+    return render(request,'barcodeapp/exit.html',{'exit':exit})
+
+def inspection(request):
+    inspection=Inspection.objects.all()
+    return render(request,'barcodeapp/inspection.html',{'inspection':inspection})
+
+def export_users_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Username', 'First name', 'Last name', 'Email address'])
+
+    users = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
+    for user in users:
+        writer.writerow(user)
+
+    return response

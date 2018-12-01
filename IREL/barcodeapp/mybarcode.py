@@ -14,4 +14,4 @@ class MyBarcodeDrawing(Drawing):
 if __name__ == '__main__':
     # use the standard 'save' method to save barcode.gif, barcode.pdf etc
     # for quick feedback while working.
-    MyBarcodeDrawing("HELLO WORLD").save(formats=['gif', 'pdf'], outDir='.', fnRoot='barcode')
+    MyBarcodeDrawing("HELLO WORLD").save(formafts=['gif', 'pdf'], outDir='.', fnRoot='barcode')

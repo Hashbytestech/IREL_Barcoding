@@ -38,7 +38,9 @@ class Product(models.Model):
     unity_of_measurement = models.CharField(max_length=255, default='NOS')
     lrd = models.DateField(blank=True, null=True)
     lid = models.DateField(blank=True, null=True)
+    quantity=models.IntegerField(blank=True,null=True)
     expiry_date = models.DateField(null=True)
+
 
     def __str__(self):
         return str(self.product_code)
