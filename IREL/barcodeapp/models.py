@@ -51,21 +51,12 @@ class Product(models.Model):
 #     purchaserequisition = models.ForeignKey('Purchaserequisition', models.DO_NOTHING, db_column='purchaserequisition')
 
 
-# class Purchaserequisition(models.Model):
-#     department = models.ForeignKey(Department, models.DO_NOTHING, db_column='department')
-#     capital_or_revenue = models.CharField(max_length=255)
-#     indent_no = models.IntegerField(blank=True, null=True)
-#     indentor_name = models.CharField(max_length=255)
-#     indentor_designation = models.CharField(max_length=255)
-#     purpose_of_procurement = models.CharField(max_length=255)
-#     nature_of_indent = models.CharField(max_length=255)
-#     section_code = models.IntegerField(blank=True, null=True)
-#     count = models.IntegerField()
-#     fullfilled_or_not = models.IntegerField()
-#     fullfilled_date = models.DateTimeField(blank=True, null=True)
+class PurchaseOrder(models.Model):
+    purchase_order_no=models.CharField(max_length=150)
+
 
 class Inspection(models.Model):
-    purchase_order_no=models.CharField(max_length=150)
+    purchase_order_no=models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity=models.IntegerField()
     date_time=models.DateTimeField()
@@ -73,7 +64,7 @@ class Inspection(models.Model):
 
 
 class Exit(models.Model):
-    product_requisition_no=models.CharField(max_length=150)
+    purchase_order_no = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, models.DO_NOTHING, db_column='product')
     issued_or_not = models.CharField(max_length=15)
     issued_to = models.ForeignKey(Department, models.DO_NOTHING, db_column='issued_to', blank=True, null=True)
