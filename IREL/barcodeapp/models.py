@@ -30,7 +30,14 @@ class Shelf(models.Model):
         return self.shelf_name
 
 
+class PurchaseOrder(models.Model):
+    purchase_order_no=models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.purchase_order_no
+
 class Product(models.Model):
+    purchase_order_no=models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE)
     product_code = models.CharField(max_length=15,null=True)
     name = models.CharField(max_length=255,null=True)
     value=models.IntegerField(null=True)
@@ -49,10 +56,6 @@ class Product(models.Model):
 # class Productrequisition(models.Model):
 #     product = models.ForeignKey(Product, models.DO_NOTHING, db_column='product')
 #     purchaserequisition = models.ForeignKey('Purchaserequisition', models.DO_NOTHING, db_column='purchaserequisition')
-
-
-class PurchaseOrder(models.Model):
-    purchase_order_no=models.CharField(max_length=150)
 
 
 class Inspection(models.Model):
