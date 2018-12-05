@@ -36,10 +36,16 @@ def poststock(request):
 
 def shelfstiker(request):
     if request.method=='POST':
-        form=ShelfstickerForm(request.POST)
-        if form.is_valid():
-            product_item=form.save(commit=False)
-            product_item.save()
+
+        godown = request.POST.get('godown')
+        rack = request.POST.get('rack')
+        shelf = request.POST.get('shelf')
+        return redirect('/rbarcode/self_barcode/'+godown+rack+shelf)
+
+        # form=ShelfstickerForm(request.POST)
+        # if form.is_valid():
+        #     product_item=form.save(commit=False)
+        #     product_item.save()
     else:
         form=ShelfstickerForm()
         return render(request,'barcodeapp/shelfsticker.html',{'form':form})
@@ -51,11 +57,15 @@ def shelfbarcodecreate(request):
 
 
 def productsticker(request):
+
     if request.method=='POST':
-        form=ProductstickerForm(request.POST)
-        if form.is_valid():
-            product_item=form.save(commit=False)
-            product_item.save()
+        # print (request.POST.get('product_code'))
+        pid = request.POST.get('product_code')
+        try:
+            pObj = Product.objects.filter(pk= pid)
+            return redirect('/rbarcode/product_barcode/'+pObj[0].product_code)
+        except: 
+            return HttpResponse('None')
     else:
         form=ProductstickerForm()
         return render(request, 'barcodeapp/productsticker.html', {'form': form})

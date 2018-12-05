@@ -1,16 +1,14 @@
 {% extends 'base.html'%}
 {%block title%}
-<title>Shelf Stickering Generator</title>
+<title>StockEntry</title>
 {%endblock%}
 {% block body %}
 <div class="container" style="background-color:lightblue"><br>
 <form method="post" action="">
         {%csrf_token%}
         {{form.as_p}}
-        <a href="{% url 'shelfbarcodecreate' %}" class="p-3 mb-2 bg-primary text-white">Create</a>
-        <input type="submit" value="Create Barcode" class="p-3 mb-2 bg-primary text-white">
 
+        <input type="submit" value="Save">
 </form>
-
 </div>
 {% endblock %}

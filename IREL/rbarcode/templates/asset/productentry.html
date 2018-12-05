@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	
+<title>ProductEntry</title>
+
+</head>
+
+
+
+<div class="container" style="background-color:lightblue"><br>
+<form type="post" action="">
+    <input type="hidden" name="csrfmiddlewaretoken" value="w2LGR9CmnHeY3K2KaIZwm2umO0zTnpm5zzpqtg8uU0Ru9LaLInKbBX36oYHfWV0T">
+    <p><label for="id_product_code">Product code:</label> <input type="text" name="product_code" maxlength="15" required id="id_product_code"></p>
+<p><label for="id_name">Name:</label> <input type="text" name="name" maxlength="255" required id="id_name"></p>
+<p><label for="id_value">Value:</label> <input type="number" name="value" required id="id_value"></p>
+<p><label for="id_barcode">Barcode:</label> <input type="text" name="barcode" maxlength="15" required id="id_barcode"></p>
+<p><label for="id_unity_of_measurement">Unity of measurement:</label> <input type="text" name="unity_of_measurement" value="NOS" maxlength="255" required id="id_unity_of_measurement"></p>
+<p><label for="id_lrd">Lrd:</label> <input type="text" name="lrd" id="id_lrd"></p>
+<p><label for="id_lid">Lid:</label> <input type="text" name="lid" id="id_lid"></p>
+<p><label for="id_quantity">Quantity:</label> <input type="number" name="quantity" id="id_quantity"></p>
+<p><label for="id_expiry_date">Expiry date:</label> <input type="text" name="expiry_date" required id="id_expiry_date"></p>
+    <input type="submit" value="Save">
+    <a href="/productbarcodecreate/" class="p-3 mb-2 bg-primary text-white">Create Barcode</a>
+
+
+</form>
+</div>
+
+</html>

@@ -1,15 +1,14 @@
 {% extends 'base.html'%}
 {%block title%}
-<title>Shelf Stickering Generator</title>
+<title>Product Stickering Generator</title>
 {%endblock%}
 {% block body %}
 <div class="container" style="background-color:lightblue"><br>
 <form method="post" action="">
         {%csrf_token%}
         {{form.as_p}}
-        <a href="{% url 'shelfbarcodecreate' %}" class="p-3 mb-2 bg-primary text-white">Create</a>
-        <input type="submit" value="Create Barcode" class="p-3 mb-2 bg-primary text-white">
-
+        <input type="submit" value="Save" class="p-3 mb-2 bg-primary text-white">
+    <a href="http://online-barcode-generator.net/" class="p-3 mb-2 bg-primary text-white">Create</a>
 </form>
 
 </div>

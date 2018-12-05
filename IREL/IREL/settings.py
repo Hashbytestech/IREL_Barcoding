@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'barcodeapp',
     'django_filters',
+    'rbarcode',
 ]
 
 MIDDLEWARE = [
