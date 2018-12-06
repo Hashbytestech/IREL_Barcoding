@@ -82,7 +82,6 @@ class Stock(models.Model):
     storage_place=models.ForeignKey(Shelf,on_delete=models.CASCADE)
 
 class Shelfsticker(models.Model):
-    godown=models.ForeignKey(Godown,on_delete=models.CASCADE)
     rack=models.ForeignKey(Rack,on_delete=models.CASCADE)
     shelf=models.CharField(max_length=150)
 
