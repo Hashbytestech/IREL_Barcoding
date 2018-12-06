@@ -15,19 +15,20 @@ class Department(models.Model):
         return self.name
 
 class Rack(models.Model):
+    godown=models.ForeignKey(Godown,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name
+        return self.godown.name+self.name
 
 class Shelf(models.Model):
-
+    rack=models.ForeignKey(Rack,on_delete=models.CASCADE)
     shelf_name = models.CharField(max_length=255)
     barcode = models.CharField(max_length=255,null=True,blank=True)
 
 
     def __str__(self):
-        return self.shelf_name
+        return self.rack.godown.name+self.shelf_name+self.shelf_name
 
 
 class PurchaseOrder(models.Model):

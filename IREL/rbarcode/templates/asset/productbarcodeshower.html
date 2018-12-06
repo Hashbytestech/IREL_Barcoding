@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Product Stickering Shower</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+    {% for i in barcode1%}:
+        {% ean = barcode.get('ean13', i.barcode, writer=ImageWriter())
+        filename = ean.save('ean13')
+    {% for i in filename%}
+    <p>{{i}}</p>
+    {% endfor %}
+</div>
+{% endblock %}

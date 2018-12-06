@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% block body%}
+{% for i in inspection%}
+<p>{i.purchase_order_no}</p>
+<p>{i.product}</p>
+<p>{i.quantity}</p>
+<p>{i.datetime}</p>
+<p>{i.datetime}</p>
+<p>{i.gate_pass_no}</p>
+
+{% endfor %}
+{% endblock %}

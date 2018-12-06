@@ -7,9 +7,8 @@
 <form method="post" action="">
         {%csrf_token%}
         {{form.as_p}}
+        <input type="submit" value="Save" class="p-3 mb-2 bg-primary text-white">
         <a href="{% url 'shelfbarcodecreate' %}" class="p-3 mb-2 bg-primary text-white">Create</a>
-        <input type="submit" value="Create Barcode" class="p-3 mb-2 bg-primary text-white">
-
 </form>
 
 </div>

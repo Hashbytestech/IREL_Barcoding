@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block body%}
+{% for i in exit%}
+<p>{i.product_requisition_no=}</p>
+<p>{i.product}</p>
+<p>{i.issued_or_not}</p>
+<p>{i.issued_to}</p>
+<p>{i.issued_date}</p>
+<p>{i.issuer_email_id}</p>
+{% endfor %}
+{% endblock %}

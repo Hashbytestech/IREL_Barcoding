@@ -2,7 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d30217f-a45d-4359-8a63-f13745245f92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/barcodeapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/barcodeapp/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/product_barcode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/exit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/inspection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/productbarcodeshower.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/productdetails.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/productentry.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/productsticker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/self_barcode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/shelfbarcodeshower.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/shelfsticker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/stockform.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/asset/template.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbarcode/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IREL/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/IREL/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IREL/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IREL/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/productsticker.html" beforeDir="false" afterPath="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/productsticker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/shelfsticker.html" beforeDir="false" afterPath="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/shelfsticker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barcodeapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/barcodeapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +43,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/barcodeapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="60">
               <caret line="12" column="46" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="47" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -24,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/barcodeapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="39" column="79" lean-forward="true" selection-start-line="39" selection-start-column="79" selection-end-line="39" selection-end-column="79" />
+            <state relative-caret-position="420">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -36,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/barcodeapp/templates/barcodeapp/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="269">
+              <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -48,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IREL/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+            <state relative-caret-position="1320">
+              <caret line="88" column="26" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -92,7 +120,6 @@
         <option value="$PROJECT_DIR$/barcodeapp/admin.py" />
         <option value="$PROJECT_DIR$/barcodeapp/urls.py" />
         <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/inspection.html" />
-        <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/index.html" />
         <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/test2.html" />
         <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/search.py" />
         <option value="$PROJECT_DIR$/barcodeapp/views.py" />
@@ -101,6 +128,7 @@
         <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/template.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/barcodeapp/models.py" />
+        <option value="$PROJECT_DIR$/barcodeapp/templates/barcodeapp/index.html" />
       </list>
     </option>
   </component>
@@ -125,6 +153,19 @@
             <path>
               <item name="IREL" type="b2602c69:ProjectViewProjectNode" />
               <item name="IREL" type="462c0819:PsiDirectoryNode" />
+              <item name="barcodeapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IREL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IREL" type="462c0819:PsiDirectoryNode" />
+              <item name="barcodeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IREL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IREL" type="462c0819:PsiDirectoryNode" />
+              <item name="barcodeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="barcodeapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -213,7 +254,7 @@
     <frame x="0" y="25" width="1366" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26742426" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24621212" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -346,7 +387,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/barcodeapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="60">
           <caret line="12" column="46" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="47" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
@@ -356,8 +397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/barcodeapp/templates/barcodeapp/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="269">
+          <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -370,15 +411,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/IREL/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+        <state relative-caret-position="1320">
+          <caret line="88" column="26" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/barcodeapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="39" column="79" lean-forward="true" selection-start-line="39" selection-start-column="79" selection-end-line="39" selection-end-column="79" />
+        <state relative-caret-position="420">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
