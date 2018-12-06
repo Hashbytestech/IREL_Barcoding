@@ -2,11 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class Godown(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
 
 class Department(models.Model):
     name = models.CharField(max_length=255)
@@ -14,20 +9,57 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-class Rack(models.Model):
-    name = models.CharField(max_length=255)
+
+class Godown(models.Model):
+    name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.name
 
-class Shelf(models.Model):
+    def save(self, *args, **kwargs):
+        self.name = self.name.upper()
+        super(Godown, self).save(*args, **kwargs)
 
-    shelf_name = models.CharField(max_length=255)
-    barcode = models.CharField(max_length=255,null=True,blank=True)
 
+class Rack(models.Model):
+    name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.shelf_name
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.upper()
+        super(Rack, self).save(*args, **kwargs)
+
+
+class Shelf(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.upper()
+        super(Shelf, self).save(*args, **kwargs)
+
+
+class ShelfSticker(models.Model):
+    godown=models.ForeignKey(Godown,on_delete=models.CASCADE)
+    rack=models.ForeignKey(Rack,on_delete=models.CASCADE)
+    shelf=models.ForeignKey(Shelf,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id).zfill(6)
+
+    class Meta:
+        unique_together = ('godown', 'rack', 'shelf',)
+
+
+class PurchaseOrder(models.Model):
+    purchase_order_no=models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.purchase_order_no
 
 
 class Product(models.Model):
@@ -86,16 +118,8 @@ class Stock(models.Model):
     existing_quantuty=models.IntegerField()
     storage_place=models.ForeignKey(Shelf,on_delete=models.CASCADE)
 
-class Shelfsticker(models.Model):
-    godown=models.ForeignKey(Godown,on_delete=models.CASCADE)
-    rack=models.ForeignKey(Rack,on_delete=models.CASCADE)
-    shelf=models.CharField(max_length=150)
 
-
-    def __str__(self):
-        return (str(self.godown)+str(self.rack)+str(self.shelf))
-
-class Productsticker(models.Model):
+class ProductSticker(models.Model):
     product_code=models.ForeignKey(Product,on_delete=models.CASCADE)
 
     def __str__(self):

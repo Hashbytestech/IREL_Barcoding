@@ -14,12 +14,12 @@ class ProductForm(ModelForm):
 
 class ShelfstickerForm(ModelForm):
     class Meta:
-        model=Shelfsticker
+        model=ShelfSticker
         fields="__all__"
 
 class ProductstickerForm(ModelForm):
     class Meta:
-        model=Productsticker
+        model=ProductSticker
         fields=['product_code',]
 
 #

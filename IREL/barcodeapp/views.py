@@ -9,6 +9,29 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib.units import mm, inch
+from reportlab.graphics.barcode import code128
+
+# from easy_pdf.views import PDFTemplateView
+from xhtml2pdf import pisa
+
+
+# import cStringIO as StringIO
+from django.template.loader import get_template 
+from django.template import Context
+from django.shortcuts import HttpResponse
+
+from django.http import HttpResponse
+# Create your views here.
+
+import traceback
+
+
+
+
 def index(request):
     return render(request,'barcodeapp/index.html')
 
@@ -51,9 +74,46 @@ def shelfstiker(request):
         return render(request,'barcodeapp/shelfsticker.html',{'form':form})
 
 def shelfbarcodecreate(request):
-    barcode=Shelfsticker.objects.all()
-    context={'barcode':barcode}
-    return render(request,'barcodeapp/shelfbarcodeshower.html',context)
+        if request.method=="POST":
+            form=ShelfstickerForm(request.POST)
+            if form.is_valid():
+                self_item_sticker = form.save(commit=False)
+                self_item_sticker.save()
+        else:
+            form=ShelfstickerForm()
+            barcode=ShelfSticker.objects.all()
+        #     context={'barcode':barcode}
+        # return render(request,'barcodeapp/shelfbarcodeshower.html',context)
+
+            print (barcode)
+
+
+            x, y = 0, 0
+            id = 'qweqwe123123'
+
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="shelfbarcode.pdf"'
+            c = canvas.Canvas(response)
+            width, height = 35*mm, 25*mm
+            c = canvas.Canvas(response, pagesize = (width, height))
+
+            for val in barcode.iterator():
+
+
+                barcode = code128.Code128(str(val),barHeight=10*mm,barWidth = 1.0)
+                barcode.drawOn(c, (x-1)*mm, (y+10)*mm)
+
+
+                wd = c.stringWidth('aa', "Helvetica", 8)
+                w = 18 - (wd*0.264583333)/2
+
+                c.setFont("Helvetica-Bold",8)
+                c.drawString((x+6)*mm, (y+5)*mm, "SELF NO: "+str(val))
+
+                c.showPage()
+            c.save()
+
+            return HttpResponse(response, content_type='application/pdf')
 
 
 def productsticker(request):
