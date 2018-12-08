@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Product Stickering Generator Status</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+{% if msg|length == 0 %}
+	Error: PO not Available for Product {{product_code}} , Please create PO first.
+{% elif isExist != '' %}
+	{{isExist}}
+{% else	 %}
+
+	Success: Barcode has been Created for Product {{product_code}} 
+{%endif%}
+
+</div>
+{% endblock %}

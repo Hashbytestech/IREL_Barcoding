@@ -27,7 +27,7 @@ from django.shortcuts import HttpResponse
 from django.http import HttpResponse
 # Create your views here.
 
-import traceback
+import sys ,traceback 
 
 
 
@@ -85,11 +85,9 @@ def shelfbarcodecreate(request):
         #     context={'barcode':barcode}
         # return render(request,'barcodeapp/shelfbarcodeshower.html',context)
 
-            print (barcode)
 
-
+            
             x, y = 0, 0
-            id = 'qweqwe123123'
 
             response = HttpResponse(content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="shelfbarcode.pdf"'
@@ -122,13 +120,37 @@ def productsticker(request):
         # print (request.POST.get('product_code'))
         pid = request.POST.get('product_code')
         try:
-            pObj = Product.objects.filter(pk= pid)
-            return redirect('/rbarcode/product_barcode/'+pObj[0].product_code)
-        except: 
-            return HttpResponse('None')
+
+            pObj = Product.objects.get(pk = pid)
+            # print (pid,444444)
+            poObj = PurchaseOrder.objects.filter(productId = pid)
+            # print (poObj,99999999999)
+            msg = poObj
+
+            print(msg,11111111)
+            isExist =''
+            if poObj:
+                posgObj = ProductSticker.objects.filter(product_code = pObj)
+                if posgObj:
+                    isExist = 'Warning: Product Barcode Already Exist...'
+                else:
+                    possObj = ProductSticker(product_code = pObj)
+                    possObj.save()
+            # else:
+                # msg = None
+
+        except:
+            msg = None
+            print (traceback.print_exc())
+
+        print (msg)
+
+        return render(request, 'barcodeapp/productstickerstatus.html', {'msg': msg,'product_code':pObj.product_code, 'isExist':isExist})
+
     else:
         form=ProductstickerForm()
         return render(request, 'barcodeapp/productsticker.html', {'form': form})
+
 
 def productbarcodecreate(request):
     barcode1=Product.objects.all()
@@ -177,3 +199,36 @@ def export_users_csv(request):
         writer.writerow(user)
 
     return response
+
+
+def productstickerbarcode(request):
+
+    barcode=ProductSticker.objects.all()
+    x, y = 0, 0
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="shelfbarcode.pdf"'
+    c = canvas.Canvas(response)
+    width, height = 70*mm, 25*mm
+    c = canvas.Canvas(response, pagesize = (width, height))
+
+    for val in barcode.iterator():
+
+        # print(val.product_code)
+        sb=PurchaseOrder.objects.filter(productId = val.product_code)
+        pbc = str(val.product_code) + str(sb[0].purchase_order_no)
+
+        barcode = code128.Code128(str(pbc),barHeight=10*mm,barWidth = 1.0)
+        barcode.drawOn(c, (x-2)*mm, (y+10)*mm)
+
+
+        wd = c.stringWidth('aa', "Helvetica", 8)
+        w = 18 - (wd*0.264583333)/2
+
+        c.setFont("Helvetica-Bold",8)
+        c.drawString((x+6)*mm, (y+5)*mm, "PRODUCT : "+str(pbc))
+
+        c.showPage()
+    c.save()
+
+    return HttpResponse(response, content_type='application/pdf')

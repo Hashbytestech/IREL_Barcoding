@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^shelfbarcodecreate/$', views.shelfbarcodecreate,name='shelfbarcodecreate'),
     url(r'^shelfstiker/$', views.shelfstiker,name='shelfstiker'),
     url(r'^productsticker/$', views.productsticker,name='productsticker'),
+    url(r'^productstickerbarcode/$', views.productstickerbarcode,name='productstickerbarcode'),
     url(r'^productbarcodecreate/$', views.productbarcodecreate,name='productbarcodecreate'),
     # url(r'^productdetails/$', views.productdetails,name='productdetails'),
     url(r'^search/$', views.search, name='search'),

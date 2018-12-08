@@ -3,6 +3,7 @@ from .models import *
 
 admin.site.register(Department)
 admin.site.register(Product)
+admin.site.register(PurchaseOrder)
 admin.site.register(Exit)
 # admin.site.register(Purchaserequisition)
 admin.site.register(Rack)

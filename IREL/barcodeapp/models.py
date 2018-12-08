@@ -55,11 +55,6 @@ class ShelfSticker(models.Model):
         unique_together = ('godown', 'rack', 'shelf',)
 
 
-class PurchaseOrder(models.Model):
-    purchase_order_no=models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.purchase_order_no
 
 
 class Product(models.Model):
@@ -120,7 +115,16 @@ class Stock(models.Model):
 
 
 class ProductSticker(models.Model):
-    product_code=models.ForeignKey(Product,on_delete=models.CASCADE)
+    product_code=models.ForeignKey(Product,on_delete=models.CASCADE, unique=True,blank=True, null=True)
 
     def __str__(self):
         return str(self.product_code)
+
+
+class PurchaseOrder(models.Model):
+    purchase_order_no=models.CharField(max_length=150)
+    productId=models.ForeignKey(Product,on_delete=models.CASCADE,blank=True, null=True)
+    departmentId = models.ForeignKey(Department,on_delete=models.CASCADE,blank=True, null=True)
+
+    def __str__(self):
+        return self.purchase_order_no
