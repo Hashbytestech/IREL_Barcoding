@@ -63,7 +63,35 @@ def shelfstiker(request):
         godown = request.POST.get('godown')
         rack = request.POST.get('rack')
         shelf = request.POST.get('shelf')
-        return redirect('/rbarcode/self_barcode/'+godown+rack+shelf)
+        msg = ''
+
+        gObj = Godown.objects.get(pk = godown)
+        rObj = Rack.objects.get(pk = rack)
+        sObj = Shelf.objects.get(pk = shelf)
+        self_count = 0
+        try:
+            self_count = ShelfSticker.objects.filter(godown = gObj, rack = rObj, shelf = sObj).count()
+            # print (sObj.query)
+            # print (sObj)
+        except:
+            print (traceback.print_exc())
+            msg = traceback.print_exc()
+
+        print(sObj)
+
+        if self_count == 0:
+            ssbj = ShelfSticker(godown = gObj, rack = rObj, shelf = sObj)
+            ssbj.save()
+
+            barcode=ShelfSticker.objects.get(pk = ssbj)
+
+            msg = "Self Sticker has been created successfully...<a href='/rbarcode/self_barcode/"+barcode+"'</a>"
+
+        else:
+            msg = "Self Sticker already created"
+
+        return HttpResponse(msg)
+        # return redirect('/rbarcode/self_barcode/'+godown+rack+shelf)
 
         # form=ShelfstickerForm(request.POST)
         # if form.is_valid():
@@ -127,7 +155,6 @@ def productsticker(request):
             # print (poObj,99999999999)
             msg = poObj
 
-            print(msg,11111111)
             isExist =''
             if poObj:
                 posgObj = ProductSticker.objects.filter(product_code = pObj)
