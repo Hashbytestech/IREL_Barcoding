@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'irel_db',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
-        'PASSWORD': 'bhushan',
+        'PASSWORD': 'mahesh@7',
         'HOST': 'localhost',
         'PORT' :'3306',
 

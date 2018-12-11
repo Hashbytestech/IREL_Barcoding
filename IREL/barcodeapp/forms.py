@@ -21,8 +21,17 @@ class ProductstickerForm(ModelForm):
     class Meta:
         model=ProductSticker
         fields=['product_code',]
-
 #
+class ExitForm(ModelForm):
+    class Meta:
+        model=Exit
+        fields='__all__'
+
+class InspectionForm(ModelForm):
+    class Meta:
+        model=Inspection
+        fields='__all__'
+
 #
 # class ProductFilter(django_filters.FilterSet):
 #     class Meta:

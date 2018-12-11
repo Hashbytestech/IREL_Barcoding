@@ -105,8 +105,9 @@ class Inspection(models.Model):
 
 
 class Exit(models.Model):
-    product_requisition_no=models.CharField(max_length=150)
+    purchase_order_no=models.CharField(max_length=150)
     product = models.ForeignKey(Product, models.DO_NOTHING, db_column='product')
+    quantity_to_exit=models.IntegerField()
     issued_or_not = models.CharField(max_length=15)
     issued_to = models.ForeignKey(Department, models.DO_NOTHING, db_column='issued_to', blank=True, null=True)
     issued_date = models.DateTimeField()

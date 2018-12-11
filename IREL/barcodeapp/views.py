@@ -7,6 +7,9 @@ from barcode.writer import ImageWriter
 import csv
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+
+
 
 
 
@@ -20,11 +23,14 @@ from xhtml2pdf import pisa
 
 
 # import cStringIO as StringIO
-from django.template.loader import get_template 
+from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import HttpResponse
 
 from django.http import HttpResponse
+# Create your views here.
+
+import sys ,traceback
 # Create your views here.
 
 import traceback
@@ -36,15 +42,35 @@ def index(request):
     return render(request,'barcodeapp/index.html')
 
 
+# def postproduct(request):
+#     if request.method=="POST":
+#         form=ProductForm(request.POST)
+#         if form.is_valid():
+#             stock_item=form.save(commit=False)
+#             stock_item.save()
+#     else:
+#         form=ProductForm()
+#         return render(request,'barcodeapp/productentry.html',{'form':form})
+
 def postproduct(request):
-    if request.method=="POST":
-        form=ProductForm(request.POST)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProductForm(request.POST)
+        # check whether it's valid:
         if form.is_valid():
-            stock_item=form.save(commit=False)
-            stock_item.save()
+            product_item=form.save(commit=True)
+            product_item.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/postproduct/')
+
+    # if a GET (or any other method) we'll create a blank form
     else:
-        form=ProductForm()
-        return render(request,'barcodeapp/productentry.html',{'form':form})
+        form = ProductForm()
+
+    return render(request, 'barcodeapp/productentry.html', {'form': form})
 
 def poststock(request):
     if request.method=="POST":
@@ -158,22 +184,74 @@ def search(request):
     return render(request, 'barcodeapp/productdetails.html', {'filter': product_filter})
 
 def exit(request):
-    exit=Exit.objects.all()
-    return render(request,'barcodeapp/exit.html',{'exit':exit})
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ExitForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            exit_item = form.save(commit=True)
+            exit_item.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/exit/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ExitForm()
+
+    return render(request, 'barcodeapp/exit.html', {'form': form})
 
 def inspection(request):
-    inspection=Inspection.objects.all()
-    return render(request,'barcodeapp/inspection.html',{'inspection':inspection})
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = InspectionForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # form.save()
+            inspection_item = form.save(commit=True)
+            inspection_item.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/inspection/')
 
-def export_users_csv(request):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = InspectionForm()
 
-    writer = csv.writer(response)
-    writer.writerow(['Username', 'First name', 'Last name', 'Email address'])
+    return render(request, 'barcodeapp/inspection.html', {'form': form})
 
-    users = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
-    for user in users:
-        writer.writerow(user)
+def productstickerbarcode(request):
 
-    return response
+    barcode=ProductSticker.objects.all()
+    x, y = 0, 0
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="shelfbarcode.pdf"'
+    c = canvas.Canvas(response)
+    width, height = 70*mm, 25*mm
+    c = canvas.Canvas(response, pagesize = (width, height))
+
+    for val in barcode.iterator():
+
+        # print(val.product_code)
+        sb=PurchaseOrder.objects.filter(productId = val.product_code)
+        pbc = str(val.product_code) + str(sb[0].purchase_order_no)
+
+        barcode = code128.Code128(str(pbc),barHeight=10*mm,barWidth = 1.0)
+        barcode.drawOn(c, (x-2)*mm, (y+10)*mm)
+
+
+        wd = c.stringWidth('aa', "Helvetica", 8)
+        w = 18 - (wd*0.264583333)/2
+
+        c.setFont("Helvetica-Bold",8)
+        c.drawString((x+6)*mm, (y+5)*mm, "PRODUCT : "+str(pbc))
+
+        c.showPage()
+    c.save()
+
+    return HttpResponse(response, content_type='application/pdf')

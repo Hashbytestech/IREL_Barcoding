@@ -1,12 +1,12 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block body%}
-{% for i in exit%}
-<p>{i.product_requisition_no=}</p>
-<p>{i.product}</p>
-<p>{i.issued_or_not}</p>
-<p>{i.issued_to}</p>
-<p>{i.issued_date}</p>
-<p>{i.issuer_email_id}</p>
-{% endfor %}
+<div class="container" style="background-color:lightblue"><br>
+<form method="post" action="">
+        {%csrf_token%}
+        {{form.as_p}}
+
+        <input type="submit" value="Save">
+</form>
+</div>
 {% endblock %}
