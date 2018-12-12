@@ -68,10 +68,9 @@ class Product(models.Model):
     value=models.IntegerField(null=True)
     barcode=models.CharField(max_length=15,null=True)
     unity_of_measurement = models.CharField(max_length=255, default='NOS')
-    lrd = models.DateField(blank=True, null=True)
-    lid = models.DateField(blank=True, null=True)
+    last_received_date = models.DateField(blank=True, null=True)
+    last_issued_date = models.DateField(blank=True, null=True)
     quantity=models.IntegerField(blank=True,null=True)
-    expiry_date = models.DateField(null=True)
 
 
     def __str__(self):
@@ -103,9 +102,12 @@ class Inspection(models.Model):
     date_time=models.DateTimeField()
     gate_pass_no=models.CharField(max_length=150)
 
+    def __str__(self):
+        return self.purchase_order_no
+
 
 class Exit(models.Model):
-    purchase_order_no=models.CharField(max_length=150)
+    product_requisition_no=models.CharField(max_length=150)
     product = models.ForeignKey(Product, models.DO_NOTHING, db_column='product')
     quantity_to_exit=models.IntegerField()
     issued_or_not = models.CharField(max_length=15)
@@ -113,6 +115,8 @@ class Exit(models.Model):
     issued_date = models.DateTimeField()
     issuer_email_id=models.CharField(max_length=150)
 
+    def __str__(self):
+        return self.product_requisition_no
 
 class Stock(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
