@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Product List</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+     <table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Product Code</th>
+    <th>Product Name</th>
+    <th>Value</th>
+    <th>Barcode</th>
+    <th>Unity Of Measurement</th>
+    <th>Last Received Date</th>
+    <th>Last Issued Date</th>
+    <th>Quantity</th>
+  </tr>
+  {% for i in product %}
+  <tr>
+    <td>{{i.id}}</td>
+    <td>{{i.product_code}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.value}}</td>
+    <td>{{i.barcode}}</td>
+    <td>{{i.unity_of_measurement}}</td>
+    <td>{{i.last_received_date}}</td>
+    <td>{{i.last_issued_date}}</td>
+    <td>{{i.quantity}}</td>
+  </tr>
+  {% endfor %}
+</table>
+    <a href="{% url 'postproduct' %}"><button type="button">Back</button> </a>
+    <a href="{% url 'index' %}"><button type="button">Home</button> </a>
+</div>
+{% endblock %}

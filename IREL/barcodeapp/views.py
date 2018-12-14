@@ -52,6 +52,11 @@ def index(request):
 #         form=ProductForm()
 #         return render(request,'barcodeapp/productentry.html',{'form':form})
 
+def productlist(request):
+    products=Product.objects.all()
+    context={'product':products}
+    return render(request,'barcodeapp/productlist.html',context)
+
 def postproduct(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -64,7 +69,7 @@ def postproduct(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect('/postproduct/')
+            return HttpResponseRedirect('/productlist/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -255,3 +260,4 @@ def productstickerbarcode(request):
     c.save()
 
     return HttpResponse(response, content_type='application/pdf')
+

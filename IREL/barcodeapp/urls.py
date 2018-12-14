@@ -4,7 +4,9 @@ from django.contrib import admin
 from .import views
 
 urlpatterns = [
+
     url(r'^$', views.index, name='index'),
+    url(r'^productlist/$', views.productlist, name='productlist'),
     url(r'^poststock/$', views.poststock, name='poststock'),
     url(r'^postproduct/$', views.postproduct, name='postproduct'),
     url(r'^shelfbarcodecreate/$', views.shelfbarcodecreate, name='shelfbarcodecreate'),
@@ -16,5 +18,6 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^inspection/$', views.inspection, name='inspection'),
     url(r'^exit/$', views.exit, name='exit'),
+
 
 ]

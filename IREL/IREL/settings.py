@@ -77,21 +77,27 @@ WSGI_APPLICATION = 'IREL.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3')
-    },
-    'users': {
-        'NAME': 'irel_db',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'mahesh@7',
-        'HOST': 'localhost',
-        'PORT' :'3306',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR,'db.sqlite3')
+    # },
+    # 'default': {
+    #     'NAME': 'irel_db2',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'USER': 'root',
+    #     'PASSWORD': 'mahesh@7',
+    #     'HOST': 'localhost',
+    #     'PORT' :'3306',},
 
+        'default': {
+        'NAME': 'hashbyte_ireldb',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'hashb_hashbyte',
+        'PASSWORD': 'uwL?x69Tx7Owpddu',
+        'HOST': '45.114.245.103',
+        'PORT' :'',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

@@ -10,7 +10,7 @@ class StockForm(ModelForm):
 class ProductForm(ModelForm):
     class Meta:
         model=Product
-        fields="__all__"
+        fields=['product_code','name','value','unity_of_measurement','last_received_date','last_issued_date','quantity']
 
 class ShelfstickerForm(ModelForm):
     class Meta:

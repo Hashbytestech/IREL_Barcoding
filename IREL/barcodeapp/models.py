@@ -66,11 +66,11 @@ class Product(models.Model):
     product_code = models.CharField(max_length=15,null=True)
     name = models.CharField(max_length=255,null=True)
     value=models.IntegerField(null=True)
-    barcode=models.CharField(max_length=15,null=True)
+    barcode=models.CharField(max_length=15,null=True,blank=True)
     unity_of_measurement = models.CharField(max_length=255, default='NOS')
     last_received_date = models.DateField(blank=True, null=True)
     last_issued_date = models.DateField(blank=True, null=True)
-    quantity=models.IntegerField(blank=True,null=True)
+    quantity=models.IntegerField()
 
 
     def __str__(self):
