@@ -200,7 +200,7 @@ def exit(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect('/exit/')
+            return HttpResponseRedirect('/productlist/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -260,4 +260,12 @@ def productstickerbarcode(request):
     c.save()
 
     return HttpResponse(response, content_type='application/pdf')
+
+def barcode(request):
+    #instantiate a drawing object
+    barcodes=Product.objects.all()
+    from . import mybarcode
+    d = mybarcode.MyBarcodeDrawing()
+    binaryStuff = d.asString('gif')
+    return HttpResponse(binaryStuff, 'image/gif')
 

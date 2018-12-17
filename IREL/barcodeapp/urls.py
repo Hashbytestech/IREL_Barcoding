@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^inspection/$', views.inspection, name='inspection'),
     url(r'^exit/$', views.exit, name='exit'),
+    url(r'^barcode/$', views.barcode,name='barcode')
 
 
 ]

@@ -1,7 +1,13 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import datetime
+import calendar
+import django.utils.timezone
 
+def return_date_time():
+    now = datetime.date.today()
+    return now + datetime.timedelta(days=700)
 
 class Department(models.Model):
     name = models.CharField(max_length=255)
@@ -52,7 +58,7 @@ class ShelfSticker(models.Model):
         return str(self.id).zfill(6)
 
     class Meta:
-        unique_together = ('godown', 'rack', 'shelf',)
+        unique_together = ('godown', 'rack', 'shelf')
 
 
 class PurchaseOrder(models.Model):
@@ -63,13 +69,19 @@ class PurchaseOrder(models.Model):
 
 
 class Product(models.Model):
+    PADS = 'PADS'
+    NUMBERS = 'NUMBERS'
+    DOZEN = 'DOZEN'
+    product_choises = (
+        (NUMBERS, 'NOS'), (DOZEN, 'DZ'), (PADS, 'PD')
+    )
     product_code = models.CharField(max_length=15,null=True)
     name = models.CharField(max_length=255,null=True)
-    value=models.IntegerField(null=True)
+    value=models.FloatField(default=0.00)
     barcode=models.CharField(max_length=15,null=True,blank=True)
-    unity_of_measurement = models.CharField(max_length=255, default='NOS')
-    last_received_date = models.DateField(blank=True, null=True)
-    last_issued_date = models.DateField(blank=True, null=True)
+    unity_of_measurement = models.CharField(max_length=255, choices=product_choises)
+    last_received_date = models.DateField(default=datetime.date.today)
+    last_issued_date = models.DateField(default=return_date_time())
     quantity=models.IntegerField()
 
 
@@ -97,9 +109,9 @@ class Product(models.Model):
 
 class Inspection(models.Model):
     purchase_order_no=models.CharField(max_length=150)
-    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    product=models.ManyToManyField(Product)
     quantity=models.IntegerField()
-    date_time=models.DateTimeField()
+    date_time=models.DateTimeField(default=django.utils.timezone.now)
     gate_pass_no=models.CharField(max_length=150)
 
     def __str__(self):
@@ -108,11 +120,11 @@ class Inspection(models.Model):
 
 class Exit(models.Model):
     product_requisition_no=models.CharField(max_length=150)
-    product = models.ForeignKey(Product, models.DO_NOTHING, db_column='product')
+    product = models.ManyToManyField(Product)
     quantity_to_exit=models.IntegerField()
     issued_or_not = models.CharField(max_length=15)
     issued_to = models.ForeignKey(Department, models.DO_NOTHING, db_column='issued_to', blank=True, null=True)
-    issued_date = models.DateTimeField()
+    issued_date = models.DateField(default=datetime.date.today)
     issuer_email_id=models.CharField(max_length=150)
 
     def __str__(self):
@@ -125,7 +137,7 @@ class Stock(models.Model):
 
 
 class ProductSticker(models.Model):
-    product_code=models.ForeignKey(Product,on_delete=models.CASCADE)
+    product_code=models.ManyToManyField(Product)
 
     def __str__(self):
         return str(self.product_code)

@@ -55,13 +55,14 @@ def productsticker(request,id):
 
 
 def product_barcode(request,id):
-	return render(request,'asset/index.html',{'bid':id})
+    context={'id':id}
+    return render(request,'asset/index.html',context)
 
 
 
 
 
-def selfsticker(request,id): 
+def selfsticker(request,id):
     x, y = 0, 0
 
     response = HttpResponse(content_type='application/pdf')

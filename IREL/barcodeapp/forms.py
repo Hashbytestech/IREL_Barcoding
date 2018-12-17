@@ -2,6 +2,7 @@ from .models import *
 from django.forms import ModelForm
 import django_filters
 
+
 class StockForm(ModelForm):
     class Meta:
         model=Stock
