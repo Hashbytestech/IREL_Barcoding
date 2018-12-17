@@ -72,16 +72,26 @@ class Product(models.Model):
     PADS = 'PADS'
     NUMBERS = 'NUMBERS'
     DOZEN = 'DOZEN'
+    SET='SET'
+    KGS='KGS'
+    LEN='LEN'
+    LIT='LIT'
+    BOT='BOT'
+    SQM='SQM'
+    PKT='PKT'
+    MTR='MTR'
+    BUN='BUN'
     product_choises = (
-        (NUMBERS, 'NOS'), (DOZEN, 'DZ'), (PADS, 'PD')
+        (NUMBERS, 'NOS'), (DOZEN, 'DZ'), (PADS, 'PD'),(SET,'SET'),(LEN,'LEN'),(KGS,'KGS'),(LIT,'LIT'),
+        (BOT,'BOT'),(SQM,'SQM'),(PKT,'PKT'),(MTR,"MTR"),(BUN,'BUN')
     )
     product_code = models.CharField(max_length=15,null=True)
     name = models.CharField(max_length=255,null=True)
-    value=models.FloatField(default=0.00)
+    value=models.FloatField(default=0.00,null=True,blank=True)
     barcode=models.CharField(max_length=15,null=True,blank=True)
     unity_of_measurement = models.CharField(max_length=255, choices=product_choises)
-    last_received_date = models.DateField(default=datetime.date.today)
-    last_issued_date = models.DateField(default=return_date_time())
+    last_received_date = models.DateField(default=datetime.date.today,blank=True,null=True)
+    last_issued_date = models.DateField(default=return_date_time(),blank=True,null=True)
     quantity=models.IntegerField()
 
 
@@ -120,7 +130,7 @@ class Inspection(models.Model):
 
 class Exit(models.Model):
     product_requisition_no=models.CharField(max_length=150)
-    product = models.ManyToManyField(Product)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity_to_exit=models.IntegerField()
     issued_or_not = models.CharField(max_length=15)
     issued_to = models.ForeignKey(Department, models.DO_NOTHING, db_column='issued_to', blank=True, null=True)
