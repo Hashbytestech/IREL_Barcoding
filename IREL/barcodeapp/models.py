@@ -69,8 +69,8 @@ class PurchaseOrder(models.Model):
 
 
 class Product(models.Model):
-    PADS = 'PADS'
-    NUMBERS = 'NUMBERS'
+    PADS= 'PADS'
+    NOS = 'NOS'
     DOZEN = 'DOZEN'
     SET='SET'
     KGS='KGS'
@@ -82,7 +82,7 @@ class Product(models.Model):
     MTR='MTR'
     BUN='BUN'
     product_choises = (
-        (NUMBERS, 'NOS'), (DOZEN, 'DZ'), (PADS, 'PD'),(SET,'SET'),(LEN,'LEN'),(KGS,'KGS'),(LIT,'LIT'),
+        (NOS, 'NOS'), (DOZEN, 'DZ'), (PADS, 'PD'),(SET,'SET'),(LEN,'LEN'),(KGS,'KGS'),(LIT,'LIT'),
         (BOT,'BOT'),(SQM,'SQM'),(PKT,'PKT'),(MTR,"MTR"),(BUN,'BUN')
     )
     product_code = models.CharField(max_length=15,null=True)

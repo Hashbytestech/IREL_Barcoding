@@ -7,6 +7,7 @@ urlpatterns = [
 
     url(r'^$', views.index, name='index'),
     url(r'^productlist/$', views.productlist, name='productlist'),
+    url(r'^exitproducts/$', views.exitproducts, name='exitproducts'),
     url(r'^poststock/$', views.poststock, name='poststock'),
     url(r'^postproduct/$', views.postproduct, name='postproduct'),
     url(r'^shelfbarcodecreate/$', views.shelfbarcodecreate, name='shelfbarcodecreate'),

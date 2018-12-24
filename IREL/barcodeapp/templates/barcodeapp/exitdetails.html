@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{%block title%}
+<title> Exit Details</title>
+{%endblock%}
+{% block body %}
+<div class="container" style="background-color:lightblue"><br>
+     <table style="width:100%" border="1">
+  <tr>
+    <th>Id</th>
+    <th>Product</th>
+    <th>Quantity To Exit</th>
+    <th>Issued To Department</th>
+    <th>Issued Or Not</th>
+    <th>Issued_Date</th>
+    <th>Issued Email Id</th>
+  </tr>
+  {% for i in exitproduct %}
+  <tr>
+    <td>{{i.id}}</td>
+    <td>{{i.product}}</td>
+    <td>{{i.quantity_to_exit}}</td>
+    <td>{{i.issued_to}}</td>
+    <td>{{i.issued_or_not}}</td>
+    <td>{{i.issued_date}}</td>
+    <td>{{i.issuer_email_id}}</td>
+  </tr>
+  {% endfor %}
+</table>
+    <a href="{% url 'exit' %}"><button type="button">Back</button> </a>
+    <a href="{% url 'index' %}"><button type="button">Home</button> </a>
+</div>
+{% endblock %}

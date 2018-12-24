@@ -9,10 +9,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
-
-
-
-
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.lib.units import mm, inch
@@ -35,9 +31,6 @@ import sys ,traceback
 
 import traceback
 
-
-
-
 def index(request):
     return render(request,'barcodeapp/index.html')
 
@@ -56,6 +49,11 @@ def productlist(request):
     products=Product.objects.all()
     context={'product':products}
     return render(request,'barcodeapp/productlist.html',context)
+
+def exitproducts(request):
+    exitproduct=Exit.objects.all()
+    context={'exitproduct':exitproduct}
+    return render(request,'barcodeapp/exitdetails.html',context)
 
 def postproduct(request):
     # if this is a POST request we need to process the form data

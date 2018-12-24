@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'barcodeapp',
-    'django_filters',
+    # 'django_filters',
     'rbarcode',
 ]
 
