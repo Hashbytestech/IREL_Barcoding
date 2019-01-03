@@ -1,7 +1,10 @@
 # Packages to be installed
-python==2.7.15
-django==1.10
+python==3.6
+django==2.0
 mysql-python
 mysqlclient
+filters
+filter # you should add these two modules in your settings.py ------->apps
+
 
 # This project shoud be connect with mysql local server
