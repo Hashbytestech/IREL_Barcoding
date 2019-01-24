@@ -1,10 +1,12 @@
 # Packages to be installed
-python==3.6
+# python==3.6
 django==2.0
-mysql-python
+# mysql-python
 mysqlclient
-filters
-filter # you should add these two modules in your settings.py ------->apps
+django-filters
+django-filter # you should add these two modules in your settings.py ------->apps
+reportlab
+xhtml12pdf
 
 
 # This project shoud be connect with mysql local server
