@@ -93,6 +93,9 @@ class Product(models.Model):
     last_received_date = models.DateField(default=datetime.date.today,blank=True,null=True)
     last_issued_date = models.DateField(default=return_date_time(),blank=True,null=True)
     quantity=models.IntegerField()
+    godown=models.CharField(max_length=50)
+    rack=models.CharField(max_length=50)
+    shelf=models.CharField(max_length=50)
 
 
     def __str__(self):

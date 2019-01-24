@@ -15,6 +15,9 @@
     <th>Last Received Date</th>
     <th>Last Issued Date</th>
     <th>Quantity</th>
+    <th>Godown</th>
+    <th>Rack</th>
+    <th>Shelf</th>
   </tr>
   {% for i in product %}
   <tr>
@@ -27,6 +30,9 @@
     <td>{{i.last_received_date}}</td>
     <td>{{i.last_issued_date}}</td>
     <td>{{i.quantity}}</td>
+    <td>{{i.godown}}</td>
+    <td>{{i.rack}}</td>
+    <td>{{i.shelf}}</td>
   </tr>
   {% endfor %}
 </table>
