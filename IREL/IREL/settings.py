@@ -88,15 +88,24 @@ DATABASES = {
     #     'PASSWORD': 'mahesh@7',
     #     'HOST': 'localhost',
     #     'PORT' :'3306',},
-
-        'default': {
-        'NAME': 'hashbyte_ireldb',
+     
+    #    'default': {
+    #    'NAME': 'hashbyte_ireldb',
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'USER': 'hashb_hashbyte',
+    #    'PASSWORD': 'uwL?x69Tx7Owpddu',
+    #    'HOST': '45.114.245.103',
+    #    'PORT' :'',
+    #}
+      'default': {
+        'NAME': 'irel',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'hashb_hashbyte',
-        'PASSWORD': 'uwL?x69Tx7Owpddu',
-        'HOST': '45.114.245.103',
+        'USER': 'root',
+        'PASSWORD': 'bhushan',
+        'HOST': 'localhost',
         'PORT' :'',
-    }
+    }	
+
 }
 
 # Password validation

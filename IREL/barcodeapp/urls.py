@@ -19,7 +19,8 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^inspection/$', views.inspection, name='inspection'),
     url(r'^exit/$', views.exit, name='exit'),
-    url(r'^barcode/$', views.barcode,name='barcode')
-
-
+    url(r'^barcode/$', views.barcode,name='barcode'),
+    url(r'^inscan/$', views.inscan,name='inscan'),
+    url(r'^inscan_submit/$', views.inscan_submit, name='inscan_submit'),
+    url(r'^check_internet/$', views.check_internet, name='check_internet')
 ]

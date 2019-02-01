@@ -267,3 +267,19 @@ def barcode(request):
     binaryStuff = d.asString('gif')
     return HttpResponse(binaryStuff, 'image/gif')
 
+def inscan(request):
+    #products=Product.objects.all()
+    context={'product':''}
+    return render(request,'barcodeapp/inscan.html',context)
+
+def inscan_submit(request):
+    bc = request.POST.get('barcode')
+    try:
+        ioj = ProductInscan(product = bc,status=1)
+        ioj.save()
+        return HttpResponse(1)
+    except:
+        return HttpResponse(0)
+
+def check_internet(request):
+    return HttpResponse(1)

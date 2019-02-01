@@ -1,0 +1,354 @@
+{% extends 'base.html'%}
+{%block title%}
+<title>Inscan Product</title>
+{%endblock%}
+{% block body %}
+
+<style>
+
+	.success {
+	  border: 2px solid green;
+	  background-color:	#006400;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+
+	.error {
+	  border: 2px solid red;
+	  background-color:#FF0000;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+	
+	.warning {
+	  border: 2px solid #CCCC00;
+	  background-color:#FFFFCC;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+	
+	.successbtn {
+	  background-color:	#CCFFCC;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+	
+	.errorbtn {
+	  background-color:#FFCCE5;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+	
+
+	.warningbtn {
+	  background-color:	#f3f3cf;
+	  cursor: pointer;
+	  -webkit-transition: background-color 2s ease-out;
+	  -moz-transition: background-color 2s ease-out;
+	  -o-transition: background-color 2s ease-out;
+	  transition: background-color 2s ease-out;
+	}
+	
+	.inscan{
+		background-color: yellow;
+		border: 2px solid red;
+	}
+
+
+</style>
+<div class="container" style="background-color:lightblue"><br/>
+
+      <div class="form-group" id="form_inscan" >
+		<a id="start_inscan" class="btn btn-primary ">Start Scan</a>
+        <input style="display:none"  type="text" class="form-control" max-length="10" size="30" name="scan_product" id="scan_product" placeholder="Click Curser and scan..."><i class="fa fa-refresh"></i>
+        <form method="post" action="inscan_submit">
+          <div class="form-group">
+            <input id="products" name="products" type="hidden" readonly="readonly" >
+            <input id="product_error" name="product_error" type="hidden" readonly="readonly" >
+            <input id="new_product_found" name="new_product_found" type="hidden" readonly="readonly">
+			
+          </div>
+		
+        </form>
+      </div>
+		<input type="hidden" id="sno" value="0">                  
+		<input type="hidden" id="product_lists" value="">                  
+		<input type="hidden" id="product_advance_lists" value="">   
+		<input type="hidden" name="new_productno" id="new_productno">
+		
+		<div class="row" >
+			<div class="col-sm-3" >
+			  <b>Total Product Inscanned</b>
+			</div>
+			<div class="col-sm-1" id="count_totalrec">0</div> 
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-12">
+				<table id="product_data" style="width:100%; border-color:#C0C0C0" border="1" cellpadding="4" cellspacing="12">
+					<tr style="background-color:#E0E0E0">
+						<th style="width:10%">Serial No.</th>
+						<th style="width:30%">Product Number</th>
+						<th style="width:40%">Status</th>
+						<th style="width:20%">Inscanned Time</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	  <br/>
+	  
+    </div>    
+	
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="application/javascript">
+
+	function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+			}
+	var csrftoken = getCookie('csrftoken');
+	function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}	
+	function getcsrf()
+	{
+		
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				}
+			}
+		});
+		return getCookie('csrftoken');
+	}
+
+
+
+$(document).on('click','body *',function(){
+    //  $(this) = your current element that clicked.
+    // additional code
+	$("#scan_product").css("display","block");
+	$("#scan_product").focus();
+});
+
+$("#start_inscan").click( function(event){
+
+		$("#scan_product").css("display","block");
+		$('#scan_product').val('');
+		$("#scan_product").focus();
+		$("#start_inscan").css("display","none");
+
+	});
+
+
+/*
+$.ajax({
+    url: "url.php",
+    timeout: 10000,
+    error: function(jqXHR) { 
+        if(jqXHR.status==0) {
+            alert(" fail to connect, please check your connection settings");
+        }
+    },
+    success: function() {
+        alert(" your connection is alright!");
+    }
+});
+*/
+
+var check_connectivity = {
+    
+    is_internet_connected: function() {
+        return $.get({
+            url: "/check_internet/",
+            dataType: 'text',
+            cache: false
+        });
+    },
+    
+};
+
+
+$("#scan_product").on('change',function() {
+	   	  // get the file name, possibly with path (depends on browser)
+		var product=$("#scan_product").val();
+			
+		$("#scan_product").val('');
+		inscanproduct(product);
+
+		$("#scan_product").val('');
+		$("#scan_product").focus();
+
+});
+
+function date()
+{
+var currentdate = new Date(); 
+var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+				
+				return datetime;
+}  
+		  
+function inscanproduct(product)
+{
+
+	var products=$('#products').val();
+	var sno = parseInt($('#sno').val())+parseInt(1);
+	if(products.indexOf(product)==-1)
+	{
+		products =products.trim();
+		//console.log(products);	
+		var product_lists=$('#product_lists').val();
+		
+		var regexp1=new RegExp("[^0-9]");
+		console.log(product+'----'+regexp1.test(product));
+		
+		
+		if(regexp1.test(product) || product.length<'4')
+		{	
+			$("#product_data").append('<tr class="error errorbtn visible"><td>'+sno+'</td><td>'+product+'</td><td>Invalid Product</td><td>'+date()+'</td></tr>');
+		}
+		else
+		{	
+			$("#scan_product").addClass("inscan");
+			$('#products').val(products +','+product);
+			
+			check_connectivity.is_internet_connected().done(function() {
+				//The resource is accessible - you are **probably** online.
+				
+				var csrf =getcsrf();
+				  $.post("/inscan_submit/", {csrfmiddlewaretoken : csrf,barcode: product}, function(result){
+					if(result==1)
+					{
+						$("#scan_product").removeClass("inscan");
+						$("#product_data").append('<tr class="success successbtn visible"><td>'+sno+'</td><td>'+product+'</td><td>Inscanned Successfully</td><td>'+date()+'</td></tr>');
+						$('#count_totalrec').text((parseInt($('#count_totalrec').text())+1));
+					}
+					else
+					{
+						$("#product_data").append('<tr class="error errorbtn visible"><td>'+sno+'</td><td>'+product+'</td><td>Something Going Error, Please contact to Admin</td><td>'+date()+'</td></tr>');
+					}
+			
+				  });
+				
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				//Something went wrong. Test textStatus/errorThrown to find out what. You may be offline.
+				
+				$("#product_data").append('<tr><td>'+sno+'</td><td>'+product+'</td><td>No internet / Something going Error</td><td>'+date()+'</td></tr>');
+			});
+			
+			
+			
+		}
+		
+	}
+	else
+	{
+		$("#product_data").append('<tr class="warning warningbtn visible"><td>'+sno+'</td><td>'+product+'</td><td>Already Scanned</td><td>'+date()+'</td></tr>');
+	}
+	
+	
+	setTimeout(function(){
+					$(".visible").removeClass('success');
+					$(".visible").removeClass('error');
+					$(".visible").removeClass('warning');
+			},1000);
+	$('#sno').val(sno);
+	$("#scan_product").val('');
+	$("#scan_product").focus();
+}
+		  
+function inscan_error_product(product)
+{
+	var products_error=$('#product_error').val();
+	if(products_error.indexOf(product)==-1)
+	{
+		$('#product_error').val(products_error +','+product);
+	}
+	$("#scan_product").val('');
+	$("#scan_product").focus();
+}
+			
+			
+			
+			
+var pressed = false; 
+var chars = []; 
+
+
+$("#scan_product").keydown(function(e) {
+	if (e.which >= 48 && e.which <= 57) {
+		chars.push(String.fromCharCode(e.which));
+	}
+	//console.log(e.which + ":" + chars.join("|"));
+	if (pressed == false) {
+		setTimeout(function(){
+		
+			var charCode = (e.which) ? e.which : event.keyCode
+
+			// check we have a long length e.g. it is a barcode
+			/*if (chars.length <4 ) {
+				var barcode = chars.join("");
+				console.log("Barcode Scanned: " + barcode);
+				//$("#scan_product").val(barcode);
+			}
+			else */
+			
+			if(charCode == 17 || charCode == 86 && charCode >= 48 && charCode <= 57)
+			{
+				alert("You Can Not Do Manual Entry");
+				$("#scan_product").val('');
+				$("#scan_product").focus();
+
+			}
+			chars = [];
+			pressed = false;
+		},100);
+	}
+	pressed = true;
+});
+
+
+
+	  
+		  
+		  
+</script
+
+{% endblock %}

@@ -154,3 +154,8 @@ class ProductSticker(models.Model):
 
     def __str__(self):
         return str(self.product_code)
+
+class ProductInscan(models.Model):
+     product = models.CharField(max_length=150)
+     date_time = models.DateTimeField(default=django.utils.timezone.now)
+     status = models.IntegerField(blank=True, null=True)
