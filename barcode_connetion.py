@@ -2,6 +2,8 @@
 import sensor
 import time
 import image
+import numpy as np
+import filters
  
 # import the lcd optionally
 # to use the LCD, uncomment Lines 9, 24, 33, and 100
