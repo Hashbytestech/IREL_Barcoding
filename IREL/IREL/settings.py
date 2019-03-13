@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'barcodeapp',
     'django_filters',
     'rbarcode',
+    'django-jenkins'
 ]
 
 MIDDLEWARE = [
